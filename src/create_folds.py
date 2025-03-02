@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import StratifiedKFold
+import config
 
 def create_folds(data_path, target_column, num_folds=5, random_state=42):
     """
@@ -26,9 +27,9 @@ def create_folds(data_path, target_column, num_folds=5, random_state=42):
     return df
 
 if __name__ == "__main__":
-    data_path = "../input/train.csv" 
-    target_column = "smoking"      
+    data_path = config.DATASET_PATH
+    target_column = config.TARGET     
     
     df_with_folds = create_folds(data_path, target_column)
     
-    df_with_folds.to_csv("../input/train_folds.csv", index=False)
+    df_with_folds.to_csv(config.FOLD_PATH, index=False)
