@@ -12,10 +12,10 @@ def run(fold, model):
 
     df_train = df[df.kfold != fold].reset_index(drop=True)
     df_valid = df[df.kfold == fold].reset_index(drop=True)
-    x_train = df_train.drop("smoking", axis=1).values
-    y_train = df_train.smoking.values
-    x_valid = df_valid.drop("smoking", axis=1).values
-    y_valid = df_valid.smoking.values
+    x_train = df_train.drop(config.TARGET, axis=1).values
+    y_train = df_train[f"{config.TARGET}"].values
+    x_valid = df_valid.drop(f"{config.TARGET}", axis=1).values
+    y_valid = df_valid[f'{config.TARGET}'].values
     
     clf = model_dispatcher.models[model]
     clf.fit(x_train, y_train)
